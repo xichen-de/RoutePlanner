@@ -70,9 +70,9 @@ RouteModel::Node *RoutePlanner::NextNode() {
               [](RouteModel::Node *a, RouteModel::Node *b) {
                   return a->g_value + a->h_value < b->g_value + b->h_value;
               });
-    RouteModel::Node *nextNode = open_list.front();
+    auto *next_node = open_list.front();
     open_list.erase(open_list.begin());
-    return nextNode;
+    return next_node;
 }
 
 
