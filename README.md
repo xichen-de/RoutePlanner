@@ -4,7 +4,7 @@ This project reads in an OpenStreetMap XML (*.osm) and asks for the start and en
 
 An example will be:
 
-Start point (0.1, 0.1), end point (0.9, 0.9)
+Start point (0.2, 0.2), end point (0.8, 0.8)
 
 <img src="README.assets/map.png" alt="map" style="zoom:50%;" />
 
