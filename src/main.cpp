@@ -61,6 +61,24 @@ static std::optional<std::vector<std::byte>> ReadFile(const std::string &path) {
     return std::move(contents);
 }
 
+float GetInput() {
+    float input = 0.0f;
+    std::cin >> input;
+    while (std::cin.fail()) {
+        std::cout << "Invalid input. Try again." << std::endl;
+        std::cin.clear();
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+        std::cin >> input;
+    }
+    return input;
+}
+
+bool CheckRange(float user_input_x, float user_input_y) {
+    return 0.0f <= user_input_x && user_input_x <= 100.0f &&
+           0.0f <= user_input_y && user_input_y <= 100.0f;
+}
+
+
 int main(int argc, const char **argv) {
     std::string osm_data_file = "";
     if (argc > 1) {
@@ -83,15 +101,23 @@ int main(int argc, const char **argv) {
         else
             osm_data = std::move(*data);
     }
+    float start_x = 0.0f;
+    float start_y = 0.0f;
+    float end_x = 0.0f;
+    float end_y = 0.0f;
+    while (true) {
+        std::cout << "Please input the x coordinate of the start point (value must between 0 and 100)" << std::endl;
+        start_x = GetInput();
+        std::cout << "Please input the y coordinate of the start point (value must between 0 and 100)" << std::endl;
+        start_y = GetInput();
+        std::cout << "Please input the x coordinate of the end point (value must between 0 and 100)" << std::endl;
+        end_x = GetInput();
+        std::cout << "Please input the y coordinate of the end point (value must between 0 and 100)" << std::endl;
+        end_y = GetInput();
+        if (CheckRange(start_x, start_y) && CheckRange(end_x, end_y)) break;
+        std::cout << "Every coordinate must be between 0 and 100. Please try again." << std::endl;
+    }
 
-    float start_x;
-    float start_y;
-    float end_x;
-    float end_y;
-    std::cout << "Please input the x and y coordinate of starting point between 0 and 100, example: 10 10" << std::endl;
-    std::cin >> start_x >> start_y;
-    std::cout << "Please input the x and y coordinate of ending point between 0 and 100, example: 90 90" << std::endl;
-    std::cin >> end_x >> end_y;
     // Build Model.
     RouteModel model{osm_data};
 
