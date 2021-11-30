@@ -1,20 +1,6 @@
-// PROJECT LICENSE
-//
-// This project was submitted by Xi Chen as part of the Nanodegree At Udacity.
-//
-// As part of Udacity Honor code, your submissions must be your own work, hence
-// submitting this project as yours will cause you to break the Udacity Honor Code
-// and the suspension of your account.
-//
-// Me, the author of the project, allow you to check the code as a reference, but if
-// you submit it, it's your own responsibility if you get expelled.
+// MIT License
 //
 // Copyright (c) 2021 Xi Chen
-//
-// Besides the above notice, the following license applies and this license notice
-// must be included in all works derived from this project.
-//
-// MIT License
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -31,7 +17,8 @@
 // FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
 // AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+// SOFTWARE.
 
 #pragma once
 
@@ -40,72 +27,105 @@
 #include <string>
 #include <cstddef>
 
-class Model
-{
+class Model {
 public:
     struct Node {
         double x = 0.f;
         double y = 0.f;
     };
-    
+
     struct Way {
         std::vector<int> nodes;
     };
-    
+
     struct Road {
-        enum Type { Invalid, Unclassified, Service, Residential,
-            Tertiary, Secondary, Primary, Trunk, Motorway, Footway };
+        enum Type {
+            Invalid, Unclassified, Service, Residential,
+            Tertiary, Secondary, Primary, Trunk, Motorway, Footway
+        };
         int way;
         Type type;
     };
-    
+
     struct Railway {
         int way;
-    };    
-    
+    };
+
     struct Multipolygon {
         std::vector<int> outer;
         std::vector<int> inner;
     };
-    
-    struct Building : Multipolygon {};
-    
-    struct Leisure : Multipolygon {};
-    
-    struct Water : Multipolygon {};
-    
+
+    struct Building : Multipolygon {
+    };
+
+    struct Leisure : Multipolygon {
+    };
+
+    struct Water : Multipolygon {
+    };
+
     struct Landuse : Multipolygon {
-        enum Type { Invalid, Commercial, Construction, Grass, Forest, Industrial, Railway, Residential };
+        enum Type {
+            Invalid, Commercial, Construction, Grass, Forest, Industrial, Railway, Residential
+        };
         Type type;
     };
-    
-    Model( const std::vector<std::byte> &xml );
-    
-    auto MetricScale() const noexcept { return m_MetricScale; }    
-    
-    auto &Nodes() const noexcept { return m_Nodes; }
-    auto &Ways() const noexcept { return m_Ways; }
-    auto &Roads() const noexcept { return m_Roads; }
-    auto &Buildings() const noexcept { return m_Buildings; }
-    auto &Leisures() const noexcept { return m_Leisures; }
-    auto &Waters() const noexcept { return m_Waters; }
-    auto &Landuses() const noexcept { return m_Landuses; }
-    auto &Railways() const noexcept { return m_Railways; }
-    
+
+    Model(const std::vector <std::byte> &xml);
+
+    auto MetricScale() const
+
+    noexcept { return m_MetricScale; }
+
+    auto &Nodes() const
+
+    noexcept { return m_Nodes; }
+
+    auto &Ways() const
+
+    noexcept { return m_Ways; }
+
+    auto &Roads() const
+
+    noexcept { return m_Roads; }
+
+    auto &Buildings() const
+
+    noexcept { return m_Buildings; }
+
+    auto &Leisures() const
+
+    noexcept { return m_Leisures; }
+
+    auto &Waters() const
+
+    noexcept { return m_Waters; }
+
+    auto &Landuses() const
+
+    noexcept { return m_Landuses; }
+
+    auto &Railways() const
+
+    noexcept { return m_Railways; }
+
 private:
     void AdjustCoordinates();
-    void BuildRings( Multipolygon &mp );
-    void LoadData(const std::vector<std::byte> &xml);
-    
-    std::vector<Node> m_Nodes;
-    std::vector<Way> m_Ways;
-    std::vector<Road> m_Roads;
-    std::vector<Railway> m_Railways;
-    std::vector<Building> m_Buildings;
-    std::vector<Leisure> m_Leisures;
-    std::vector<Water> m_Waters;
-    std::vector<Landuse> m_Landuses;
-    
+
+    void BuildRings(Multipolygon &mp);
+
+    void LoadData(const std::vector <std::byte> &xml);
+
+    std::vector <Node> m_Nodes;
+    std::vector <Way> m_Ways;
+    std::vector <Road> m_Roads;
+    std::vector <Railway> m_Railways;
+    std::vector <Building> m_Buildings;
+    std::vector <Leisure> m_Leisures;
+    std::vector <Water> m_Waters;
+    std::vector <Landuse> m_Landuses;
+
     double m_MinLat = 0.;
     double m_MaxLat = 0.;
     double m_MinLon = 0.;

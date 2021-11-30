@@ -1,20 +1,6 @@
-// PROJECT LICENSE
-//
-// This project was submitted by Xi Chen as part of the Nanodegree At Udacity.
-//
-// As part of Udacity Honor code, your submissions must be your own work, hence
-// submitting this project as yours will cause you to break the Udacity Honor Code
-// and the suspension of your account.
-//
-// Me, the author of the project, allow you to check the code as a reference, but if
-// you submit it, it's your own responsibility if you get expelled.
+// MIT License
 //
 // Copyright (c) 2021 Xi Chen
-//
-// Besides the above notice, the following license applies and this license notice
-// must be included in all works derived from this project.
-//
-// MIT License
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -31,7 +17,8 @@
 // FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
 // AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+// SOFTWARE.
 
 #pragma once
 
@@ -41,59 +28,71 @@
 
 using namespace std::experimental;
 
-class Render
-{
+class Render {
 public:
-    Render(RouteModel &model );
-    void Display( io2d::output_surface &surface );
-    
+    Render(RouteModel &model);
+
+    void Display(io2d::output_surface &surface);
+
 private:
     void BuildRoadReps();
+
     void BuildLanduseBrushes();
-    
+
     void DrawBuildings(io2d::output_surface &surface) const;
+
     void DrawHighways(io2d::output_surface &surface) const;
+
     void DrawRailways(io2d::output_surface &surface) const;
+
     void DrawLeisure(io2d::output_surface &surface) const;
+
     void DrawWater(io2d::output_surface &surface) const;
+
     void DrawLanduses(io2d::output_surface &surface) const;
+
     void DrawStartPosition(io2d::output_surface &surface) const;
+
     void DrawEndPosition(io2d::output_surface &surface) const;
+
     void DrawPath(io2d::output_surface &surface) const;
+
     io2d::interpreted_path PathFromWay(const Model::Way &way) const;
+
     io2d::interpreted_path PathFromMP(const Model::Multipolygon &mp) const;
+
     io2d::interpreted_path PathLine() const;
 
-    
+
     RouteModel &m_Model;
     float m_Scale = 1.f;
     float m_PixelsInMeter = 1.f;
     io2d::matrix_2d m_Matrix;
-    
-    io2d::brush m_BackgroundFillBrush{ io2d::rgba_color{238, 235, 227} };
-    
-    io2d::brush m_BuildingFillBrush{ io2d::rgba_color{208, 197, 190} };
-    io2d::brush m_BuildingOutlineBrush{ io2d::rgba_color{181, 167, 154} };
+
+    io2d::brush m_BackgroundFillBrush{io2d::rgba_color{238, 235, 227}};
+
+    io2d::brush m_BuildingFillBrush{io2d::rgba_color{208, 197, 190}};
+    io2d::brush m_BuildingOutlineBrush{io2d::rgba_color{181, 167, 154}};
     io2d::stroke_props m_BuildingOutlineStrokeProps{1.f};
-    
-    io2d::brush m_LeisureFillBrush{ io2d::rgba_color{189, 252, 193} };
-    io2d::brush m_LeisureOutlineBrush{ io2d::rgba_color{160, 248, 162} };
+
+    io2d::brush m_LeisureFillBrush{io2d::rgba_color{189, 252, 193}};
+    io2d::brush m_LeisureOutlineBrush{io2d::rgba_color{160, 248, 162}};
     io2d::stroke_props m_LeisureOutlineStrokeProps{1.f};
 
-    io2d::brush m_WaterFillBrush{ io2d::rgba_color{155, 201, 215} };    
-        
-    io2d::brush m_RailwayStrokeBrush{ io2d::rgba_color{93,93,93} };
-    io2d::brush m_RailwayDashBrush{ io2d::rgba_color::white };
+    io2d::brush m_WaterFillBrush{io2d::rgba_color{155, 201, 215}};
+
+    io2d::brush m_RailwayStrokeBrush{io2d::rgba_color{93, 93, 93}};
+    io2d::brush m_RailwayDashBrush{io2d::rgba_color::white};
     io2d::dashes m_RailwayDashes{0.f, {3.f, 3.f}};
     float m_RailwayOuterWidth = 3.f;
     float m_RailwayInnerWidth = 2.f;
-    
+
     struct RoadRep {
         io2d::brush brush{io2d::rgba_color::black};
         io2d::dashes dashes{};
         float metric_width = 1.f;
     };
-    std::unordered_map<Model::Road::Type, RoadRep> m_RoadReps;
-    
-    std::unordered_map<Model::Landuse::Type, io2d::brush> m_LanduseBrushes;
+    std::unordered_map <Model::Road::Type, RoadRep> m_RoadReps;
+
+    std::unordered_map <Model::Landuse::Type, io2d::brush> m_LanduseBrushes;
 };
