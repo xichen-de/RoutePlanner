@@ -27,13 +27,9 @@ jobs:
           cmake ..
           cmake --build .
           sudo make install
-      - name: Build project with cmake
+      - name: Build project with cmake and test.
         run: |
-          cd ..
-          cd ..
           mkdir build && cd build
           cmake ..
           make
-      - name: Run tests
-        run: |
           ./test
