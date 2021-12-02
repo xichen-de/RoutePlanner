@@ -28,8 +28,12 @@ jobs:
           cmake --build .
           sudo make install
       - name: Build project with cmake
-        uses: nicledomaS/cmake_build_action@v1.4
-        with:
-          submodule_update: ON
-          run_tests: ON
-          unit_test_build: -Dtest=ON
+        run: |
+          cd ..
+          cd ..
+          mkdir build && cd build
+          cmake ..
+          make
+      - name: Run tests
+        run: |
+          ./test
