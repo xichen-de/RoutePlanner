@@ -27,9 +27,6 @@ jobs:
           cmake ..
           cmake --build .
           sudo make install
-          cd ..
-          cd ..
-          cd RoutePlanner
       - name: Build project with cmake
         uses: nicledomaS/cmake_build_action@v1.4
         with:
