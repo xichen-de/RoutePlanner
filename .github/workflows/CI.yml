@@ -22,7 +22,6 @@ jobs:
           cd P0267_RefImpl
           mkdir Debug
           cd Debug
-          cmake --config Debug "-DCMAKE_BUILD_TYPE=Debug" ..
           cmake --build .
           sudo make install .
           cd ..
