@@ -17,5 +17,5 @@ jobs:
           docker build -t project-dev -f ci/docker/ubuntu/Dockerfile .
       - name: Build project with cmake and test.
         run: |
-          docker run --rm -d --name test -v $(pwd):/usr/src/project -ti project-dev bash 
-          docker exec -it test bash -c "cd /usr/src/project && rm -rf build && mkdir build && cd build && cmake .. && make && ./test"
+          docker run --rm -d --name test -v $(pwd):/usr/src/project project-dev bash 
+          docker exec test bash -c "cd /usr/src/project && rm -rf build && mkdir build && cd build && cmake .. && make && ./test"
