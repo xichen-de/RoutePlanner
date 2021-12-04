@@ -1,6 +1,6 @@
 # Route Planner
 
-![CI](https://github.com/xichen-de/RoutePlanner/actions/workflows/CI.yml/badge.svg)
+![CI](https://github.com/xichen-de/RoutePlanner/actions/workflows/docker.yml/badge.svg)
 
 This project reads in an OpenStreetMap XML (*.osm) and asks for the start and end point of the route, then visualizes the shortest route for it.
 

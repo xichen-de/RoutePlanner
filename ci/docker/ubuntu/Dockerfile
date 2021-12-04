@@ -21,6 +21,13 @@ rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 SHELL ["/bin/bash", "-c"]
 RUN apt-get update -q && \
     apt-get install -yq libcairo2-dev libgraphicsmagick1-dev libpng-dev
+
+# Copy the current folder which contains C++ source code to the Docker image under /usr/src
+COPY . /usr/src/dockertest1
+
+# Specify the working directory
+WORKDIR /usr/src/dockertest1
+
 RUN git clone --recurse-submodules https://github.com/cpp-io2d/P0267_RefImpl && \
     cd P0267_RefImpl && \
     mkdir Debug && \

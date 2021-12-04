@@ -17,4 +17,5 @@ jobs:
           docker build --target=base --tag project:base -f ci/docker/ubuntu/Dockerfile .
       - name: Build project with cmake and test.
         run: |
-          docker run --rm --init -t --name test project:base cmake --build build --target test
+          docker run -v $(pwd):/usr/src/project --rm --init -t --name test project:base 
+          docker exec -it test /bin/bash -c "cd /usr/src/project && mkdir build && cmake .. && make && ./test"
