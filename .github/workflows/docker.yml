@@ -1,6 +1,6 @@
 name: C++ CI
 
-on: [push, pull_request]
+on: [ push, pull_request ]
 
 jobs:
   ubuntu-build:
@@ -13,5 +13,4 @@ jobs:
           docker build -t project-dev -f ci/docker/ubuntu/Dockerfile .
       - name: Build project with cmake and test.
         run: |
-          docker run --rm --init -itd --name test -v $(pwd):/usr/src/project project-dev bash
-          docker exec -it test bash -c "cd /usr/src/project && rm -rf build && mkdir build && cd build && cmake .. && make && ./test"
+          docker run --rm -v $(pwd):/usr/src/project project-dev bash -c "cd /usr/src/project && bash build_and_test.sh"
